@@ -7,14 +7,18 @@
 
 1. node 프로그램 설치
 2. 폴더 생성
-3. cd
-4. npm create vite@latest
-5. cd 경로/패키지명
-6. npm i or npm install 명령어를 필수 입력해주세요.
-   그외. npx create-react-app useful-tools(.prettierrc 파일 작성후 진행)
+3. cd 경로명
+4. 프로젝트 생성 
+   - npm create vite@latest
+5. 폴더 이동 
+   - cd 경로/패키지명
+6. node_modules 폴더 (라이브러리가 실제로 저장된 장소)
+   - package.json에 입력된 dependecies 정보
+   - npm i 또는 npm install
+
 
 # prettierrc 설정
-
+설치 : npx create-react-app useful-tools(.prettierrc 파일 작성후 진행)
 1. ctrl + ,
 2. .prettierrc 파일 생성
 3. format on save 검색 후 체크
