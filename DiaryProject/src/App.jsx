@@ -1,4 +1,5 @@
 import "./App.css";
+import React from "react";
 import { Routes, Route, Link, useNavigate } from "react-router-dom"; //Link 컴포넌트 = a태그
 import Diary from "./pages/Diary";
 import Home from "./pages/Home";
@@ -11,34 +12,39 @@ import Notfound from "./pages/Notfound";
 function App() {
 	const nav = useNavigate();
 
-	//이벤트 핸들러 함수 : 특정 조건에 따라 이동할 페이지가 다르다면 useNavigate  커스텀 훅을 사용하자.
+	//이벤트 핸들러 함수 안에서 특정 조건에 따라 이동할 페이지가 다르다면 import - useNavigate  커스텀 훅을 사용하자.
 	const onClickButton = () => {
-		nav("/new");
+		nav("/new"); // navigate 함수를 받아와서 사용하면 된다.
 	};
 	return (
 		<>
-			{/* 전역으로 보일게 아니면 Routes 컴포넌트 외부에 배치는 적절하지 않다. */}
 			<div>
-				{/* 
-				Link 컴포넌트
-					SSR방식으로 페이지가 렌더링된다. 새로고침되지 않고 쾌적하고 빠르다. 
-				
-				a태그
-					a태그 사용하면 SSR방식으로 새로고침되는걸 알 수 있다.*/}
+				<img src={"/emotion1.png"} />
+			</div>
+			{/* 전역으로 보일게 아니면 Routes 컴포넌트 외부에 배치는 적절하지 않다. */}
+
+			<div>
+				{/*🚩 Link 컴포넌트*/}
+				{/*	내부 링크 만들때 사용, CSR 방식, 새로고침되지 않고 쾌적하고 빠르다.*/}
+				{/*🚩 a태그*/}
+				{/*	a태그 사용하면 SSR 방식으로 새로고침되는걸 알 수 있다.*/}
 				<Link to={"/"}>Home</Link>
 				<Link to={"/new"}>New</Link>
 				<Link to={"/diary"}>Diary</Link>
-
 				<button onClick={onClickButton}>New 페이지로 이동</button>
 			</div>
+
+
 			{/*  Routes 컴포넌트 안에는 Route 컴포넌트만 적을 수 있다. 
 			path가 들어오면 아래 적힌
 			Route컴포넌트를 위에서부터 아래로 찾는다. */}
+
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/new" element={<New />} />
-				<Route path="/diary" element={<Diary />} />
-				{/* 와일드카드 : 위에 경로와 일치하지 않으면 Notfound 컴포넌트를 페이지 렌더링하게된다. */}
+				{/*⏬URL Parameter를 사용하기 위해 ':id' 지정*/}
+				<Route path="/diary/:id" element={<Diary />} />
+				{/* ⏬와일드카드 : 위에 경로와 일치하지 않으면 Notfound 컴포넌트를 페이지 렌더링하게된다. */}
 				<Route path="*" element={<Notfound />} />
 			</Routes>
 		</>
