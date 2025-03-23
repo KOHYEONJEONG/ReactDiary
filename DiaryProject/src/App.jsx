@@ -1,10 +1,12 @@
 import "./App.css";
+import "./index.css";
 import React from "react";
 import { Routes, Route, Link, useNavigate } from "react-router-dom"; //Link 컴포넌트 = a태그
 import Diary from "./pages/Diary";
 import Home from "./pages/Home";
 import New from "./pages/New";
 import Notfound from "./pages/Notfound";
+import { getEmotionImage } from "./util/get-emotion-image";
 
 // 1. "/" : 모든 일기를 조회하는 Home 페이지
 // 2. "/new" : 새로운 일기를 작성하는 New 페이지
@@ -19,7 +21,13 @@ function App() {
 	return (
 		<>
 			<div>
-				<img src={"/emotion1.png"} />
+				{/* public폴더 아래에서 불러오면 이미지 최적화 x(새로고침할떄마다 매번 불러옴.) <img src={"/emotion1.png"} /> */}
+				<img src={getEmotionImage(1)} />
+				<img src={getEmotionImage(2)} />
+				<img src={getEmotionImage(3)} />
+				<img src={getEmotionImage(4)} />
+				<img src={getEmotionImage(5)} />
+				{/* <img src={emotion5} /> */}
 			</div>
 			{/* 전역으로 보일게 아니면 Routes 컴포넌트 외부에 배치는 적절하지 않다. */}
 
@@ -33,7 +41,6 @@ function App() {
 				<Link to={"/diary"}>Diary</Link>
 				<button onClick={onClickButton}>New 페이지로 이동</button>
 			</div>
-
 
 			{/*  Routes 컴포넌트 안에는 Route 컴포넌트만 적을 수 있다. 
 			path가 들어오면 아래 적힌
