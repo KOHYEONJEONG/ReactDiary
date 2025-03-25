@@ -31,6 +31,12 @@ function  reducer(state, action){
 	switch (action.type){ //명심! type
 		case "CREATE":
 			return [action.data, ...state];
+		case "UPDATE" :
+			//혹시 모를 상황을 대비해 String으로 형변환
+			return state.map((item) => String(item.id) === String(action.data.id) ? action.data : item);
+		case "DELETE" :
+			//혹시 모를 상황을 대비해 String으로 형변환
+			return state.filter((item) => String(item.id) !== String(action.data.id));
 		default:
 			return state;
 	}
@@ -47,7 +53,28 @@ function App() {
 				id: idRef.current++,
 				createdData,
 				emotionId,
-				mockData
+				contents
+			}
+		});
+	}
+
+	const onUpdate = (id, createdData, emotionId, contents) => {
+		dispatch({
+			type: "UPDATE",
+			data: {
+				id: id,
+				createdData,
+				emotionId,
+				contents
+			}
+		});
+	}
+
+	const onDelete = (id) => {
+		dispatch({
+			type: "DELETE",
+			data: {
+				id: id,
 			}
 		});
 	}
@@ -62,6 +89,11 @@ function App() {
 			<button onClick={()=>{
 				onCreate(new Date().getTime(),1,"hello");
 			}}>일기 추가 테스트</button>
+
+			<button onClick={()=>{
+				onUpdate(1, new Date().getTime(),2,"updateHello");
+			}}>1번 일기 수정 테스트</button>
+
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/new" element={<New />} />
