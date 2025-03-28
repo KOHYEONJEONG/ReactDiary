@@ -1,15 +1,11 @@
 import "./App.css";
 import "./index.css";
-import React,{useReducer, useRef} from "react";
+import React,{useReducer, useRef, createContext} from "react";
 import { Routes, Route} from "react-router-dom"; //Link 컴포넌트 = a태그
 import Diary from "./pages/Diary";
 import Home from "./pages/Home";
 import New from "./pages/New";
 import Notfound from "./pages/Notfound";
-
-// 1. "/" : 모든 일기를 조회하는 Home 페이지
-// 2. "/new" : 새로운 일기를 작성하는 New 페이지
-// 3. "/diary" : 일기를 상세히 조회하는 Diary 페이지
 
 const mockData = [//임시 데이터
 	{
@@ -32,15 +28,25 @@ function  reducer(state, action){
 		case "CREATE":
 			return [action.data, ...state];
 		case "UPDATE" :
+			// map : 배열 안의 각 원소를 변환할 때 사용되며, 이 과정에서 새로운 배열 생성
 			//혹시 모를 상황을 대비해 String으로 형변환
 			return state.map((item) => String(item.id) === String(action.data.id) ? action.data : item);
 		case "DELETE" :
+			//filter : 조건에 만족하면 새로운 배열 생성
 			//혹시 모를 상황을 대비해 String으로 형변환
 			return state.filter((item) => String(item.id) !== String(action.data.id));
 		default:
 			return state;
 	}
 }
+
+//일기 데이터 공급할 context
+export const DiaryStateContext = createContext();
+export  const DiaryDispatchContext = createContext();
+
+// 1. "/" : 모든 일기를 조회하는 Home 페이지
+// 2. "/new" : 새로운 일기를 작성하는 New 페이지
+// 3. "/diary" : 일기를 상세히 조회하는 Diary 페이지
 function App() {
 	const [data, dispatch] = useReducer(reducer, mockData);//네트워크 탭 > App 컴포넌트 클릭 > Reducer 에서 확인 가능.
 	const idRef = useRef(3);
@@ -94,14 +100,26 @@ function App() {
 				onUpdate(1, new Date().getTime(),2,"updateHello");
 			}}>1번 일기 수정 테스트</button>
 
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/new" element={<New />} />
-				{/*⏬URL Parameter를 사용하기 위해 ':id' 지정*/}
-				<Route path="/diary/:id" element={<Diary />} />
-				{/* ⏬와일드카드 : 위에 경로와 일치하지 않으면 Notfound 컴포넌트를 페이지 렌더링하게된다. */}
-				<Route path="*" element={<Notfound />} />
-			</Routes>
+			{/*⏬ 개발자도구 > Components 탭에서 확인 가능*/}
+			<DiaryStateContext.Provider value={data}>
+				<DiaryDispatchContext.Provider
+					value={{
+						onCreate,
+						onUpdate,
+						onDelete,
+					}}
+				>
+
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/new" element={<New />} />
+					{/*⏬URL Parameter를 사용하기 위해 ':id' 지정*/}
+					<Route path="/diary/:id" element={<Diary />} />
+					{/* ⏬와일드카드 : 위에 경로와 일치하지 않으면 Notfound 컴포넌트를 페이지 렌더링하게된다. */}
+					<Route path="*" element={<Notfound />} />
+				</Routes>
+				</DiaryDispatchContext.Provider>
+			</DiaryStateContext.Provider>
 		</>
 	);
 }
