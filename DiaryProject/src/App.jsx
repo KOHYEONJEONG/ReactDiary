@@ -10,16 +10,23 @@ import Notfound from "./pages/Notfound";
 const mockData = [//임시 데이터
 	{
 		id : 1,
-		createDate : new Date().getTime(),
+		createdDate : new Date("2025-03-31").getTime(),
 		emotionId : 1,
 		contents : "1번 일기"
 	},
 	{
 		id : 2,
-		createDate : new Date().getTime(),
+		createdDate : new Date("2025-03-30").getTime(),
 		emotionId : 2,
 		contents : "2번 일기"
+	},
+	{
+		id : 3,
+		createdDate : new Date("2025-02-30").getTime(),
+		emotionId : 3,
+		contents : "3번 일기"
 	}
+
 ]
 
 function  reducer(state, action){
