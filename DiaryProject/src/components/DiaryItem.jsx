@@ -2,9 +2,12 @@ import { useNavigate } from "react-router-dom";
 import { getEmotionImage } from "../util/get-emotion-image";
 import Button from "./Button";
 import "./DiaryItem.css";
+import {useState} from "react";
 
-const DiaryItem = ({ id, emotionId, createdDate, content }) => {
+const DiaryItem = ({ id, emotionId, createdDate, content }) => {//key는 없어도 되는군!
     const nav = useNavigate();
+
+
 
     const goDiaryPage = () => {
         nav(`/diary/${id}`);

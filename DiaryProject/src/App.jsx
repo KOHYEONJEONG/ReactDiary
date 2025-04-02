@@ -22,7 +22,7 @@ const mockData = [//임시 데이터
 	},
 	{
 		id : 3,
-		createdDate : new Date("2025-02-30").getTime(),
+		createdDate : new Date("2025-01-28").getTime(),
 		emotionId : 3,
 		contents : "3번 일기"
 	}

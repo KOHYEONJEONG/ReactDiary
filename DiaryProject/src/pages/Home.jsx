@@ -18,7 +18,6 @@ const getMonthlyData = (pivotDate, data) => {
         0,
         0
     ).getTime();
-
     //이번달에 종료일
     const endTime = new Date(
         pivotDate.getFullYear(),
@@ -30,9 +29,10 @@ const getMonthlyData = (pivotDate, data) => {
     ).getTime();
 
 
+
     return data.filter(
         (item) =>
-            beginTime <=  item.createdDate && item.createdDate <= endTime
+            beginTime <= item.createdDate && item.createdDate <= endTime
     )
 }
 
@@ -40,8 +40,7 @@ const getMonthlyData = (pivotDate, data) => {
 const Home = () => {
     //props: 임시 데이터를 불러와 날짜 필터링 (개발자도구 > Components 탭 > App 컴포넌트 클릭 > hooks에서  data 확인
     const data = useContext(DiaryStateContext);
-
-    //날짜를 보관하는 pivotDate
+    //날짜를 보관하는 pivotDate (이번달에 해당하는 date에 일기만 보여지게 하기 위함)
     const [pivotDate, setPivotDate] = useState(new Date());
 
     //한달전으로 표시
@@ -58,6 +57,9 @@ const Home = () => {
         );
     }
 
+    const monthlyData = getMonthlyData(pivotDate, data);
+    console.log("monthlyData => ",monthlyData);
+
     return <div>
                 <Header
                     title={`${pivotDate.getFullYear()}년 ${pivotDate.getMonth()+1}월`}//템플릿 리터럴로 표시 $
@@ -65,7 +67,7 @@ const Home = () => {
                     rightChild={<Button text={">"} onClick={onIncreaseMonth}/>} //다음달로
                 />
 
-                <DiaryList />
+                <DiaryList data={monthlyData} />
             </div>;
  }
 
