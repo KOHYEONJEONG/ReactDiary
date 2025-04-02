@@ -11,7 +11,7 @@ const DiaryList = ({data}) => {
 
     const getSortedData = () => {
 
-        //비교함수(불변성 유지), 새 배열 반환
+        //비교함수(불변성 유지),원본 수정x, 새 배열 반환
         return data.toSorted((a,b) => {
             if(sortType === "oldset"){
                 //숫자 오름차순(a가 앞, 작은 수 앞)

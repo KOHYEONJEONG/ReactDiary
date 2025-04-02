@@ -18,6 +18,7 @@ const getMonthlyData = (pivotDate, data) => {
         0,
         0
     ).getTime();
+
     //이번달에 종료일
     const endTime = new Date(
         pivotDate.getFullYear(),
@@ -61,6 +62,7 @@ const Home = () => {
     console.log("monthlyData => ",monthlyData);
 
     return <div>
+                {/*양쪽 버튼을 클릭 시 월단위로 이동*/}
                 <Header
                     title={`${pivotDate.getFullYear()}년 ${pivotDate.getMonth()+1}월`}//템플릿 리터럴로 표시 $
                     leftChild={<Button text={"<"} onClick={onDecreaseMonth}/>} // 한달전으로
