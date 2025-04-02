@@ -3,6 +3,7 @@ import "./index.css";
 import React,{useReducer, useRef, createContext} from "react";
 import { Routes, Route} from "react-router-dom"; //Link 컴포넌트 = a태그
 import Diary from "./pages/Diary";
+import Edit from "./pages/Edit";
 import Home from "./pages/Home";
 import New from "./pages/New";
 import Notfound from "./pages/Notfound";
@@ -30,7 +31,6 @@ const mockData = [//임시 데이터
 ]
 
 function  reducer(state, action){
-	console.log(action);
 	switch (action.type){ //명심! type
 		case "CREATE":
 			return [action.data, ...state];
@@ -122,6 +122,7 @@ function App() {
 					<Route path="/new" element={<New />} />
 					{/*⏬URL Parameter를 사용하기 위해 ':id' 지정*/}
 					<Route path="/diary/:id" element={<Diary />} />
+					<Route path="/edit/:id" element={<Edit />} />
 					{/* ⏬와일드카드 : 위에 경로와 일치하지 않으면 Notfound 컴포넌트를 페이지 렌더링하게된다. */}
 					<Route path="*" element={<Notfound />} />
 				</Routes>

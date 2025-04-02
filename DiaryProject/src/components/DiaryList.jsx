@@ -1,8 +1,11 @@
 import Button from "./Button.jsx";
 import DiaryItem from "./DiaryItem.jsx";
 import "./DiaryList.css"
+import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 const DiaryList = ({data}) => {
+    const nav = useNavigate();
+
     const [sortType, setSortType] = useState("latest");
 
     const onChangeSortType =(e) => {
@@ -24,7 +27,6 @@ const DiaryList = ({data}) => {
     }
 
     const sortedData = getSortedData();
-    console.log(sortedData)
 
     return (
         <div className="DiaryList">
@@ -35,7 +37,10 @@ const DiaryList = ({data}) => {
                     <option value="oldset">오래된순</option>
                 </select>
 
-                <Button text={"새 일기 쓰기"} type={"POSITIVE"}></Button>
+                <Button
+                    onClick={() => nav("/new")}
+                    text={"새 일기 쓰기"}
+                    type={"POSITIVE"}></Button>
             </div>
             <div className="list_wrapper">
                 {/*각각의 일기 데이터를 보여줌.(고유 key값 필수 설정)*/}
