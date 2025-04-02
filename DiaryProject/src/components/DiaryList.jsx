@@ -10,11 +10,14 @@ const DiaryList = ({data}) => {
     }
 
     const getSortedData = () => {
-        return data.toSorted((a,b) => {
 
+        //비교함수(불변성 유지), 새 배열 반환
+        return data.toSorted((a,b) => {
             if(sortType === "oldset"){
+                //숫자 오름차순(a가 앞, 작은 수 앞)
                 return Number(a.createdDate) - Number(b.createdDate)
             }else{
+                //숫자 내림차순(b가 앞, 큰 수 앞)
                 return Number(b.createdDate) - Number(a.createdDate)
             }
         })
