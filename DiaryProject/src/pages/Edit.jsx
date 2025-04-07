@@ -12,7 +12,7 @@ const Edit = () => {
 	console.log(params.id);
 	const nav = useNavigate();
 	const { onDelete, onUpdate } = useContext(DiaryDispatchContext);
-	const data = useContext(DiaryStateContext);
+	const data = useContext(DiaryStateContext); // 일기 데이터 배열
 	const [curDiaryItem, setCurDiaryItem] = useState();
 
 	useEffect(() => {
@@ -25,24 +25,31 @@ const Edit = () => {
 		if (!currentDiarayItem) {
 			//존재하지 않는 페이지에 들어온 경우
 			window.alert("존재하지 않는 일기입니다.");
-			nav("/", { replace: true });
+			nav("/", { replace: true }); // Home 페이지로 돌아가고 + 이후 뒤로가기 방지
 		}
 
-		setCurDiaryItem(currentDiarayItem);
+		setCurDiaryItem(currentDiarayItem);// return 문 대신 setState를 호출하여 저장한다.
+
+		//노란색 경고는 무시해도 된다.
 	}, [params.id]); //data는 제외한다.(url 파라미터의 id값이 변화하지 않으면 다시는 호출되지 않게.)
 
 	const onClickDelete = () => {
 		//삭제 확인 후 삭제 진행
 		if (window.confirm("삭제하시겠습니까?")) {
 			onDelete(params.id);
-			nav("/", { replace: true });
 		}
-		nav("/", { replace: true });
+		nav("/", { replace: true }); //Home 페이지로 이동하면서 + 다시 수정페이지로 돌아오지 못하게 뒤로가기 방지
 	};
 
 	const onSubmit = (input) => {
-		if (window.confirm("수정하시겠습니까?")) {
-			onUpdate(params.id, input.createdDate.getTime(), input.emotionId, input.content);
+		if (window.confirm("일기를 정말 수정할까요?")) {
+			onUpdate(
+				params.id,
+				input.createdDate.getTime(),
+				input.emotionId,
+				input.content
+			);
+			nav("/", { replace: true });
 		}
 	};
 

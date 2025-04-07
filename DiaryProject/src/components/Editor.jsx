@@ -78,7 +78,7 @@ const Editor = ({ onSubmit, initData }) => {
 		//하나의 state에 보관할 수 있음
 		createdDate: new Date(),
 		emotionId: 3,
-		contents: "",
+		content: "",
 	});
 
 	const onSubmitButtonClick = () => {
@@ -126,8 +126,8 @@ const Editor = ({ onSubmit, initData }) => {
 			<section className="content_section">
 				<h4>오늘의 일기</h4>
 				<textarea
-					name="contents"
-					value={input.contents}
+					name="content"
+					value={input.content}
 					onChange={onChangeInput}
 					placeholder="오늘은 어땠나요?"
 				/>

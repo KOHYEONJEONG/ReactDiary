@@ -14,19 +14,19 @@ const mockData = [
 		id: 1,
 		createdDate: new Date("2025-03-31").getTime(),
 		emotionId: 1,
-		contents: "1번 일기",
+		content: "1번 일기",
 	},
 	{
 		id: 2,
 		createdDate: new Date("2025-03-30").getTime(),
 		emotionId: 2,
-		contents: "2번 일기",
+		content: "2번 일기",
 	},
 	{
 		id: 3,
 		createdDate: new Date("2025-01-28").getTime(),
 		emotionId: 3,
-		contents: "3번 일기",
+		content: "3번 일기",
 	},
 ];
 
@@ -40,7 +40,9 @@ function reducer(state, action) {
 			// map : 배열 안의 각 원소를 변환할 때 사용되며, 이 과정에서 새로운 배열 생성
 			//혹시 모를 상황을 대비해 String으로 형변환
 			return state.map((item) =>
-				String(item.id) === String(action.data.id) ? action.data : item
+				String(item.id) === String(action.data.id)
+				? action.data
+				: item
 			);
 		case "DELETE":
 			//filter : 조건에 만족하면 새로운 배열 생성
@@ -62,7 +64,7 @@ function App() {
 	const [data, dispatch] = useReducer(reducer, mockData); //네트워크 탭 > App 컴포넌트 클릭 > Reducer 에서 확인 가능.
 	const idRef = useRef(3);
 
-	const onCreate = (createdDate, emotionId, contents) => {
+	const onCreate = (createdDate, emotionId, content) => {
 		//새로운 일기를 추가하는 기능.
 		dispatch({
 			type: "CREATE",
@@ -70,19 +72,20 @@ function App() {
 				id: idRef.current++,
 				createdDate,
 				emotionId,
-				contents,
+				content,
 			},
 		});
 	};
 
-	const onUpdate = (id, createdData, emotionId, contents) => {
+	const onUpdate = (id, createdDate, emotionId, content) => {
+		console.log(id, createdDate, emotionId, content)
 		dispatch({
 			type: "UPDATE",
 			data: {
 				id: id,
-				createdData,
+				createdDate,
 				emotionId,
-				contents,
+				content,
 			},
 		});
 	};

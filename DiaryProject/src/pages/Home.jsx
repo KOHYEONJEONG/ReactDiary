@@ -28,7 +28,7 @@ const getMonthlyData = (pivotDate, data) => {
 //인덱스 페이지
 const Home = () => {
 	//props: 임시 데이터를 불러와 날짜 필터링 (개발자도구 > Components 탭 > App 컴포넌트 클릭 > hooks에서  data 확인
-	const data = useContext(DiaryStateContext);
+	const data = useContext(DiaryStateContext);// 일기 데이터 배열
 	//날짜를 보관하는 pivotDate (이번달에 해당하는 date에 일기만 보여지게 하기 위함)
 	const [pivotDate, setPivotDate] = useState(new Date());
 
