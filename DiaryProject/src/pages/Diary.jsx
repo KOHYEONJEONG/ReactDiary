@@ -29,7 +29,7 @@ const Diary = () => {
 			></Header>
 
 			{/* 상세화면 */}
-			<Viewer ></Viewer>
+			<Viewer emotionId={emotionId} content={content}></Viewer>
 		</div>
 	);
 };

@@ -3,8 +3,8 @@ import "./Viewer.css";
 import { getEmotionImage } from "../util/get-emotion-image";
 import { emotionList } from "../util/constansts";
 
-function Viewer() {
-	const emotionId = 1;
+function Viewer({ emotionId,content}) {
+	// const emotionId = 1;
 	const emotionItem = emotionList.find((item) => String(item.emotionId) === String(emotionId));
 	return (
 		<div className="Viewer">
@@ -18,7 +18,7 @@ function Viewer() {
 			<section className="content_section">
 				<h4>오늘의 일기</h4>
 				<div className="content_wrapper">
-					<p>..일기</p>
+					<p>{content}</p>
 				</div>
 			</section>
 		</div>

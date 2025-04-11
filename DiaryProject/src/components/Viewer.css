@@ -30,30 +30,25 @@
 .Viewer .emotion_img_wrapper_1 {
 	background-color: rgb(100, 201, 100);
 }
-
 .Viewer .emotion_img_wrapper_2 {
 	background-color: rgb(157, 215, 114);
 }
-
 .Viewer .emotion_img_wrapper_3 {
 	background-color: rgb(253, 206, 23);
 }
-
 .Viewer .emotion_img_wrapper_4 {
 	background-color: rgb(253, 132, 70);
 }
-
 .Viewer .emotion_img_wrapper_5 {
 	background-color: rgb(253, 86, 95);
 }
 
 .Viewer .content_wrapper {
 	width: 100%;
-	background-color: rgba(236, 236, 236, 0.863);
+	background-color: rgb(236, 236, 236);
 	border-radius: 5px;
 
 	word-break: keep-all;
-	/* 자연스럽게 줄바꿈되게 */
 	overflow-wrap: break-word;
 }
 
